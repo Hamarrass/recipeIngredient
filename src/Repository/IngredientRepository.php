@@ -39,6 +39,16 @@ class IngredientRepository extends ServiceEntityRepository
         }
     }
 
+    // public function recipesForGivenIngredient($ingredient){
+
+    //     return  $this->createQueryBuilder('a')
+    //         ->select('a')
+    //         ->andWhere('a.dateCreation = :date')
+    //         ->setParameter('date',$date->format('y-m-d'))
+    //         ->getQuery()->getResult();
+             
+    //  }
+
 //    /**
 //     * @return Ingredient[] Returns an array of Ingredient objects
 //     */

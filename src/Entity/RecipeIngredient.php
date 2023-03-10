@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecipeIngredientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RecipeIngredientRepository::class)]
@@ -21,6 +23,14 @@ class RecipeIngredient
 
     #[ORM\Column]
     private ?int $quantity = null;
+
+    #[ORM\OneToMany(mappedBy: 'recipeingredient', targetEntity: RealizationStp::class)]
+    private Collection $realizationStps;
+
+    public function __construct()
+    {
+        $this->realizationStps = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +69,36 @@ class RecipeIngredient
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RealizationStp>
+     */
+    public function getRealizationStps(): Collection
+    {
+        return $this->realizationStps;
+    }
+
+    public function addRealizationStp(RealizationStp $realizationStp): self
+    {
+        if (!$this->realizationStps->contains($realizationStp)) {
+            $this->realizationStps->add($realizationStp);
+            $realizationStp->setRecipeingredient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRealizationStp(RealizationStp $realizationStp): self
+    {
+        if ($this->realizationStps->removeElement($realizationStp)) {
+            // set the owning side to null (unless already changed)
+            if ($realizationStp->getRecipeingredient() === $this) {
+                $realizationStp->setRecipeingredient(null);
+            }
+        }
 
         return $this;
     }

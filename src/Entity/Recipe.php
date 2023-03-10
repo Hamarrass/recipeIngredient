@@ -34,9 +34,6 @@ class Recipe
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
- 
-    #[ORM\OneToMany(mappedBy: 'Recipe', targetEntity: RealizationStep::class)]
-    private Collection $realizationSteps;
 
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeIngredient::class)]
     private Collection $recipeIngredients;
@@ -44,7 +41,7 @@ class Recipe
     public function __construct()
     {
        
-        $this->realizationSteps = new ArrayCollection();
+       
         $this->recipeIngredients = new ArrayCollection();
     }
 
@@ -126,35 +123,7 @@ class Recipe
     }
 
 
-    /**
-     * @return Collection<int, RealizationStep>
-     */
-    public function getRealizationSteps(): Collection
-    {
-        return $this->realizationSteps;
-    }
 
-    public function addRealizationStep(RealizationStep $realizationStep): self
-    {
-        if (!$this->realizationSteps->contains($realizationStep)) {
-            $this->realizationSteps->add($realizationStep);
-            $realizationStep->setRecipe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRealizationStep(RealizationStep $realizationStep): self
-    {
-        if ($this->realizationSteps->removeElement($realizationStep)) {
-            // set the owning side to null (unless already changed)
-            if ($realizationStep->getRecipe() === $this) {
-                $realizationStep->setRecipe(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, RecipeIngredient>

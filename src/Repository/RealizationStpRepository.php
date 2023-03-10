@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\RealizationStep;
+use App\Entity\RealizationStp;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<RealizationStep>
+ * @extends ServiceEntityRepository<RealizationStp>
  *
- * @method RealizationStep|null find($id, $lockMode = null, $lockVersion = null)
- * @method RealizationStep|null findOneBy(array $criteria, array $orderBy = null)
- * @method RealizationStep[]    findAll()
- * @method RealizationStep[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method RealizationStp|null find($id, $lockMode = null, $lockVersion = null)
+ * @method RealizationStp|null findOneBy(array $criteria, array $orderBy = null)
+ * @method RealizationStp[]    findAll()
+ * @method RealizationStp[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RealizationStepRepository extends ServiceEntityRepository
+class RealizationStpRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, RealizationStep::class);
+        parent::__construct($registry, RealizationStp::class);
     }
 
-    public function save(RealizationStep $entity, bool $flush = false): void
+    public function save(RealizationStp $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class RealizationStepRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(RealizationStep $entity, bool $flush = false): void
+    public function remove(RealizationStp $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class RealizationStepRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return RealizationStep[] Returns an array of RealizationStep objects
+//     * @return RealizationStp[] Returns an array of RealizationStp objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class RealizationStepRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?RealizationStep
+//    public function findOneBySomeField($value): ?RealizationStp
 //    {
 //        return $this->createQueryBuilder('r')
 //            ->andWhere('r.exampleField = :val')
